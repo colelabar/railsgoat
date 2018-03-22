@@ -1,0 +1,425 @@
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "analytics"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "analytics" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "ip_address" varchar, "referrer" varchar, "user_agent" varchar, "created_at" datetime, "updated_at" datetime)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "benefits"[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "benefits" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime, "updated_at" datetime)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "key_managements"[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "key_managements" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "iv" varchar, "user_id" integer, "created_at" datetime, "updated_at" datetime)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "messages"[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "messages" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "creator_id" integer, "receiver_id" integer, "message" text, "read" boolean, "created_at" datetime, "updated_at" datetime)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "paid_time_offs"[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "paid_time_offs" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "sick_days_taken" integer, "sick_days_earned" integer, "pto_taken" integer, "pto_earned" integer, "created_at" datetime, "updated_at" datetime)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "pays"[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "pays" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "bank_account_num" varchar, "bank_routing_num" varchar, "percent_of_deposit" integer, "created_at" datetime, "updated_at" datetime)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "performances"[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "performances" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "date_submitted" date, "score" integer, "comments" varchar, "reviewer" integer, "created_at" datetime, "updated_at" datetime)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "retirements"[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "retirements" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "total" varchar, "employee_contrib" varchar, "employer_contrib" varchar, "user_id" integer, "created_at" datetime, "updated_at" datetime)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "schedules"[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "schedules" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "event_type" varchar, "date_begin" date, "date_end" date, "event_name" varchar, "event_desc" varchar, "user_id" integer, "created_at" datetime, "updated_at" datetime)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "users"[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar, "password" varchar, "admin" boolean, "first_name" varchar, "last_name" varchar, "created_at" datetime, "updated_at" datetime, "auth_token" varchar)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "work_infos"[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "work_infos" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "income" varchar, "bonuses" varchar, "years_worked" integer, "SSN" varchar, "DoB" date, "created_at" datetime, "updated_at" datetime, "encrypted_ssn" blob)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20171007010129)[0m
+  [1m[35m (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20130424220355),
+(20130524222129),
+(20130525001150),
+(20130527165832),
+(20130531143853),
+(20130531182058),
+(20130708202859),
+(20131011180207),
+(20131112235256),
+(20131113200708),
+(20140312002642),
+(20140315002730),
+(20140408185601);
+
+[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2018-03-20 16:29:53.466490"], ["updated_at", "2018-03-20 16:29:53.466490"]]
+  [1m[35m (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "analytics"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE TABLE "analytics" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "ip_address" varchar, "referrer" varchar, "user_agent" varchar, "created_at" datetime, "updated_at" datetime)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "benefits"[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "benefits" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime, "updated_at" datetime)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "key_managements"[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "key_managements" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "iv" varchar, "user_id" integer, "created_at" datetime, "updated_at" datetime)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "messages"[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "messages" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "creator_id" integer, "receiver_id" integer, "message" text, "read" boolean, "created_at" datetime, "updated_at" datetime)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "paid_time_offs"[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "paid_time_offs" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "sick_days_taken" integer, "sick_days_earned" integer, "pto_taken" integer, "pto_earned" integer, "created_at" datetime, "updated_at" datetime)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "pays"[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "pays" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "bank_account_num" varchar, "bank_routing_num" varchar, "percent_of_deposit" integer, "created_at" datetime, "updated_at" datetime)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "performances"[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "performances" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "date_submitted" date, "score" integer, "comments" varchar, "reviewer" integer, "created_at" datetime, "updated_at" datetime)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "retirements"[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "retirements" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "total" varchar, "employee_contrib" varchar, "employer_contrib" varchar, "user_id" integer, "created_at" datetime, "updated_at" datetime)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "schedules"[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "schedules" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "event_type" varchar, "date_begin" date, "date_end" date, "event_name" varchar, "event_desc" varchar, "user_id" integer, "created_at" datetime, "updated_at" datetime)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "users"[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar, "password" varchar, "admin" boolean, "first_name" varchar, "last_name" varchar, "created_at" datetime, "updated_at" datetime, "auth_token" varchar)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "work_infos"[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "work_infos" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "income" varchar, "bonuses" varchar, "years_worked" integer, "SSN" varchar, "DoB" date, "created_at" datetime, "updated_at" datetime, "encrypted_ssn" blob)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20171007010129)[0m
+  [1m[35m (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20130424220355),
+(20130524222129),
+(20130525001150),
+(20130527165832),
+(20130531143853),
+(20130531182058),
+(20130708202859),
+(20131011180207),
+(20131112235256),
+(20131113200708),
+(20140312002642),
+(20140315002730),
+(20140408185601);
+
+[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2018-03-20 16:29:53.489843"], ["updated_at", "2018-03-20 16:29:53.489843"]]
+  [1m[35m (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = ?, "updated_at" = ? WHERE "ar_internal_metadata"."key" = ?[0m  [["value", "test"], ["updated_at", "2018-03-20 16:29:53.491662"], ["key", "environment"]]
+  [1m[35m (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "admin@metacorp.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "password", "admin", "first_name", "last_name", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["email", "admin@metacorp.com"], ["password", "c93ccd78b2076528346216b3b2f701e6"], ["admin", "t"], ["first_name", "Admin"], ["last_name", ""], ["created_at", "2018-03-20 16:29:53.522997"], ["updated_at", "2018-03-20 16:29:53.522997"]]
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "retirements" ("total", "employee_contrib", "employer_contrib", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["total", "4500"], ["employee_contrib", "1000"], ["employer_contrib", "2000"], ["user_id", 1], ["created_at", "2018-03-20 16:29:53.596468"], ["updated_at", "2018-03-20 16:29:53.596468"]]
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "paid_time_offs" ("user_id", "sick_days_taken", "sick_days_earned", "pto_taken", "pto_earned", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["user_id", 1], ["sick_days_taken", 1], ["sick_days_earned", 5], ["pto_taken", 10], ["pto_earned", 30], ["created_at", "2018-03-20 16:29:53.597285"], ["updated_at", "2018-03-20 16:29:53.597285"]]
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "schedules" ("event_type", "date_begin", "date_end", "event_name", "event_desc", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["event_type", "pto"], ["date_begin", "2014-07-30"], ["date_end", "2014-08-02"], ["event_name", "My 2014 Vacation"], ["event_desc", "vacation to france"], ["user_id", 1], ["created_at", "2018-03-20 16:29:53.598046"], ["updated_at", "2018-03-20 16:29:53.598046"]]
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "work_infos" ("user_id", "income", "bonuses", "years_worked", "SSN", "DoB", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["user_id", 1], ["income", "$60,000"], ["bonuses", "$12,000"], ["years_worked", 3], ["SSN", "888-88-8888"], ["DoB", "1981-01-01"], ["created_at", "2018-03-20 16:29:53.598799"], ["updated_at", "2018-03-20 16:29:53.598799"]]
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "performances" ("user_id", "date_submitted", "score", "comments", "reviewer", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["user_id", 1], ["date_submitted", "2011-01-01"], ["score", 4], ["comments", "Wow, right out of the gate we've been very impressed but unfortunately, our system doesn't allow us to give you a full 5.0 because other ppl have gotten 5.0 ratings."], ["reviewer", 1], ["created_at", "2018-03-20 16:29:53.599526"], ["updated_at", "2018-03-20 16:29:53.599526"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."auth_token" = ? LIMIT ?[0m  [["auth_token", "YuiYZyqVrlsLk7+6YcrC1Q=="], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? AND ("users"."id" != ?) LIMIT ?[0m  [["email", "admin@metacorp.com"], ["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.1ms)[0m  [1m[33mUPDATE "users" SET "updated_at" = ?, "auth_token" = ? WHERE "users"."id" = ?[0m  [["updated_at", "2018-03-20 16:29:53.601206"], ["auth_token", "YuiYZyqVrlsLk7+6YcrC1Q=="], ["id", 1]]
+  [1m[35m (1.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "jmmastey@metacorp.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "password", "admin", "first_name", "last_name", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["email", "jmmastey@metacorp.com"], ["password", "86b7cb2f8938d6622a3f297be56401f2"], ["admin", "f"], ["first_name", "Joseph"], ["last_name", "Mastey"], ["created_at", "2018-03-20 16:29:53.605816"], ["updated_at", "2018-03-20 16:29:53.605816"]]
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "retirements" ("total", "employee_contrib", "employer_contrib", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["total", "4500"], ["employee_contrib", "1000"], ["employer_contrib", "2000"], ["user_id", 2], ["created_at", "2018-03-20 16:29:53.610804"], ["updated_at", "2018-03-20 16:29:53.610804"]]
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "paid_time_offs" ("user_id", "sick_days_taken", "sick_days_earned", "pto_taken", "pto_earned", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["user_id", 2], ["sick_days_taken", 1], ["sick_days_earned", 5], ["pto_taken", 10], ["pto_earned", 30], ["created_at", "2018-03-20 16:29:53.611719"], ["updated_at", "2018-03-20 16:29:53.611719"]]
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "schedules" ("event_type", "date_begin", "date_end", "event_name", "event_desc", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["event_type", "pto"], ["date_begin", "2014-07-30"], ["date_end", "2014-08-02"], ["event_name", "My 2014 Vacation"], ["event_desc", "vacation to france"], ["user_id", 2], ["created_at", "2018-03-20 16:29:53.612591"], ["updated_at", "2018-03-20 16:29:53.612591"]]
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "work_infos" ("user_id", "income", "bonuses", "years_worked", "SSN", "DoB", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["user_id", 2], ["income", "$60,000"], ["bonuses", "$12,000"], ["years_worked", 3], ["SSN", "888-88-8888"], ["DoB", "1981-01-01"], ["created_at", "2018-03-20 16:29:53.613488"], ["updated_at", "2018-03-20 16:29:53.613488"]]
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "performances" ("user_id", "date_submitted", "score", "comments", "reviewer", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["user_id", 2], ["date_submitted", "2012-01-01"], ["score", 5], ["comments", "We highly recommend promotion for this employee! Consistent performer with proven leadership qualities."], ["reviewer", 1], ["created_at", "2018-03-20 16:29:53.614329"], ["updated_at", "2018-03-20 16:29:53.614329"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."auth_token" = ? LIMIT ?[0m  [["auth_token", "u+jYGPB0oRUhqcMvKK9l+Q=="], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? AND ("users"."id" != ?) LIMIT ?[0m  [["email", "jmmastey@metacorp.com"], ["id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (0.1ms)[0m  [1m[33mUPDATE "users" SET "updated_at" = ?, "auth_token" = ? WHERE "users"."id" = ?[0m  [["updated_at", "2018-03-20 16:29:53.616067"], ["auth_token", "u+jYGPB0oRUhqcMvKK9l+Q=="], ["id", 2]]
+  [1m[35m (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "jack@metacorp.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "password", "admin", "first_name", "last_name", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["email", "jack@metacorp.com"], ["password", "b46dd2888a0904972649cc880a93f4dd"], ["admin", "f"], ["first_name", "Jack"], ["last_name", "Mannino"], ["created_at", "2018-03-20 16:29:53.618101"], ["updated_at", "2018-03-20 16:29:53.618101"]]
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "retirements" ("total", "employee_contrib", "employer_contrib", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["total", "4500"], ["employee_contrib", "1000"], ["employer_contrib", "2000"], ["user_id", 3], ["created_at", "2018-03-20 16:29:53.621033"], ["updated_at", "2018-03-20 16:29:53.621033"]]
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "paid_time_offs" ("user_id", "sick_days_taken", "sick_days_earned", "pto_taken", "pto_earned", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["user_id", 3], ["sick_days_taken", 2], ["sick_days_earned", 5], ["pto_taken", 5], ["pto_earned", 30], ["created_at", "2018-03-20 16:29:53.621780"], ["updated_at", "2018-03-20 16:29:53.621780"]]
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "schedules" ("event_type", "date_begin", "date_end", "event_name", "event_desc", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["event_type", "pto"], ["date_begin", "2013-12-20"], ["date_end", "2013-12-30"], ["event_name", "Christmas Leave"], ["event_desc", "Xmas Staycation"], ["user_id", 3], ["created_at", "2018-03-20 16:29:53.622466"], ["updated_at", "2018-03-20 16:29:53.622466"]]
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "work_infos" ("user_id", "income", "bonuses", "years_worked", "SSN", "DoB", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["user_id", 3], ["income", "$50,000"], ["bonuses", "$10,000"], ["years_worked", 2], ["SSN", "666-66-6666"], ["DoB", "1980-01-01"], ["created_at", "2018-03-20 16:29:53.623235"], ["updated_at", "2018-03-20 16:29:53.623235"]]
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "performances" ("user_id", "date_submitted", "score", "comments", "reviewer", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["user_id", 3], ["date_submitted", "2012-01-01"], ["score", 5], ["comments", "We highly recommend promotion for this employee! Consistent performer with proven leadership qualities."], ["reviewer", 1], ["created_at", "2018-03-20 16:29:53.623942"], ["updated_at", "2018-03-20 16:29:53.623942"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."auth_token" = ? LIMIT ?[0m  [["auth_token", "FHTVQHQuRINydPUi6uiZMQ=="], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? AND ("users"."id" != ?) LIMIT ?[0m  [["email", "jack@metacorp.com"], ["id", 3], ["LIMIT", 1]]
+  [1m[35mSQL (0.1ms)[0m  [1m[33mUPDATE "users" SET "updated_at" = ?, "auth_token" = ? WHERE "users"."id" = ?[0m  [["updated_at", "2018-03-20 16:29:53.625434"], ["auth_token", "FHTVQHQuRINydPUi6uiZMQ=="], ["id", 3]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "jim@metacorp.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "password", "admin", "first_name", "last_name", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["email", "jim@metacorp.com"], ["password", "e1eb29f815193265b57d31bb4d9de140"], ["admin", "f"], ["first_name", "Jim"], ["last_name", "Manico"], ["created_at", "2018-03-20 16:29:53.627699"], ["updated_at", "2018-03-20 16:29:53.627699"]]
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "retirements" ("total", "employee_contrib", "employer_contrib", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["total", "12500"], ["employee_contrib", "3000"], ["employer_contrib", "6000"], ["user_id", 4], ["created_at", "2018-03-20 16:29:53.630781"], ["updated_at", "2018-03-20 16:29:53.630781"]]
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "paid_time_offs" ("user_id", "sick_days_taken", "sick_days_earned", "pto_taken", "pto_earned", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["user_id", 4], ["sick_days_taken", 3], ["sick_days_earned", 6], ["pto_taken", 3], ["pto_earned", 20], ["created_at", "2018-03-20 16:29:53.631459"], ["updated_at", "2018-03-20 16:29:53.631459"]]
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "schedules" ("event_type", "date_begin", "date_end", "event_name", "event_desc", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["event_type", "pto"], ["date_begin", "2013-09-13"], ["date_end", "2013-09-20"], ["event_name", "AZ Trip"], ["event_desc", "Taking kids to Grand Canyon"], ["user_id", 4], ["created_at", "2018-03-20 16:29:53.632130"], ["updated_at", "2018-03-20 16:29:53.632130"]]
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "work_infos" ("user_id", "income", "bonuses", "years_worked", "SSN", "DoB", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["user_id", 4], ["income", "$30,000"], ["bonuses", "7,000"], ["years_worked", 1], ["SSN", "999-99-9999"], ["DoB", "1982-01-01"], ["created_at", "2018-03-20 16:29:53.632794"], ["updated_at", "2018-03-20 16:29:53.632794"]]
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "performances" ("user_id", "date_submitted", "score", "comments", "reviewer", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["user_id", 4], ["date_submitted", "2011-01-01"], ["score", 4], ["comments", "Wow, right out of the gate we've been very impressed but unfortunately, our system doesn't allow us to give you a full 5.0 because other ppl have gotten 5.0 ratings."], ["reviewer", 1], ["created_at", "2018-03-20 16:29:53.633482"], ["updated_at", "2018-03-20 16:29:53.633482"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."auth_token" = ? LIMIT ?[0m  [["auth_token", "65Ti9JWJk1vgRjc5je1V8g=="], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? AND ("users"."id" != ?) LIMIT ?[0m  [["email", "jim@metacorp.com"], ["id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (0.1ms)[0m  [1m[33mUPDATE "users" SET "updated_at" = ?, "auth_token" = ? WHERE "users"."id" = ?[0m  [["updated_at", "2018-03-20 16:29:53.634902"], ["auth_token", "65Ti9JWJk1vgRjc5je1V8g=="], ["id", 4]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "mike@metacorp.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "password", "admin", "first_name", "last_name", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["email", "mike@metacorp.com"], ["password", "df5d9020fa0f31adc4fd279020f587c8"], ["admin", "f"], ["first_name", "Mike"], ["last_name", "McCabe"], ["created_at", "2018-03-20 16:29:53.636869"], ["updated_at", "2018-03-20 16:29:53.636869"]]
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "retirements" ("total", "employee_contrib", "employer_contrib", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["total", "30000"], ["employee_contrib", "8000"], ["employer_contrib", "16000"], ["user_id", 5], ["created_at", "2018-03-20 16:29:53.640316"], ["updated_at", "2018-03-20 16:29:53.640316"]]
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "paid_time_offs" ("user_id", "sick_days_taken", "sick_days_earned", "pto_taken", "pto_earned", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["user_id", 5], ["sick_days_taken", 2], ["sick_days_earned", 5], ["pto_taken", 5], ["pto_earned", 30], ["created_at", "2018-03-20 16:29:53.641095"], ["updated_at", "2018-03-20 16:29:53.641095"]]
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "schedules" ("event_type", "date_begin", "date_end", "event_name", "event_desc", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["event_type", "pto"], ["date_begin", "2013-12-20"], ["date_end", "2013-12-30"], ["event_name", "Christmas Leave"], ["event_desc", "Xmas Staycation"], ["user_id", 5], ["created_at", "2018-03-20 16:29:53.641745"], ["updated_at", "2018-03-20 16:29:53.641745"]]
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "work_infos" ("user_id", "income", "bonuses", "years_worked", "SSN", "DoB", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["user_id", 5], ["income", "$60,000"], ["bonuses", "$12,000"], ["years_worked", 3], ["SSN", "888-88-8888"], ["DoB", "1981-01-01"], ["created_at", "2018-03-20 16:29:53.642435"], ["updated_at", "2018-03-20 16:29:53.642435"]]
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "performances" ("user_id", "date_submitted", "score", "comments", "reviewer", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["user_id", 5], ["date_submitted", "2013-01-01"], ["score", 2], ["comments", "Ehh, you are okay, we will let you stay..... barely"], ["reviewer", 1], ["created_at", "2018-03-20 16:29:53.643159"], ["updated_at", "2018-03-20 16:29:53.643159"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."auth_token" = ? LIMIT ?[0m  [["auth_token", "u0gA5sWbAxvmMJPGCOlyHA=="], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? AND ("users"."id" != ?) LIMIT ?[0m  [["email", "mike@metacorp.com"], ["id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (0.1ms)[0m  [1m[33mUPDATE "users" SET "updated_at" = ?, "auth_token" = ? WHERE "users"."id" = ?[0m  [["updated_at", "2018-03-20 16:29:53.644720"], ["auth_token", "u0gA5sWbAxvmMJPGCOlyHA=="], ["id", 5]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ken@metacorp.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "password", "admin", "first_name", "last_name", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["email", "ken@metacorp.com"], ["password", "67a2faf94e8e71113617d4b72f851bf0"], ["admin", "f"], ["first_name", "Ken"], ["last_name", "Johnson"], ["created_at", "2018-03-20 16:29:53.646757"], ["updated_at", "2018-03-20 16:29:53.646757"]]
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "retirements" ("total", "employee_contrib", "employer_contrib", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["total", "12500"], ["employee_contrib", "3000"], ["employer_contrib", "6000"], ["user_id", 6], ["created_at", "2018-03-20 16:29:53.649636"], ["updated_at", "2018-03-20 16:29:53.649636"]]
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "paid_time_offs" ("user_id", "sick_days_taken", "sick_days_earned", "pto_taken", "pto_earned", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["user_id", 6], ["sick_days_taken", 2], ["sick_days_earned", 5], ["pto_taken", 5], ["pto_earned", 30], ["created_at", "2018-03-20 16:29:53.650312"], ["updated_at", "2018-03-20 16:29:53.650312"]]
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "schedules" ("event_type", "date_begin", "date_end", "event_name", "event_desc", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["event_type", "pto"], ["date_begin", "2013-09-13"], ["date_end", "2013-09-20"], ["event_name", "AZ Trip"], ["event_desc", "Taking kids to Grand Canyon"], ["user_id", 6], ["created_at", "2018-03-20 16:29:53.650984"], ["updated_at", "2018-03-20 16:29:53.650984"]]
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "work_infos" ("user_id", "income", "bonuses", "years_worked", "SSN", "DoB", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["user_id", 6], ["income", "$60,000"], ["bonuses", "$12,000"], ["years_worked", 3], ["SSN", "888-88-8888"], ["DoB", "1981-01-01"], ["created_at", "2018-03-20 16:29:53.651851"], ["updated_at", "2018-03-20 16:29:53.651851"]]
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "performances" ("user_id", "date_submitted", "score", "comments", "reviewer", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["user_id", 6], ["date_submitted", "2013-01-01"], ["score", 5], ["comments", "Great worker, great attitude for this newcomer!"], ["reviewer", 1], ["created_at", "2018-03-20 16:29:53.652601"], ["updated_at", "2018-03-20 16:29:53.652601"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."auth_token" = ? LIMIT ?[0m  [["auth_token", "S2noj4+NoU88DH/rIjwPUA=="], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? AND ("users"."id" != ?) LIMIT ?[0m  [["email", "ken@metacorp.com"], ["id", 6], ["LIMIT", 1]]
+  [1m[35mSQL (0.1ms)[0m  [1m[33mUPDATE "users" SET "updated_at" = ?, "auth_token" = ? WHERE "users"."id" = ?[0m  [["updated_at", "2018-03-20 16:29:53.654158"], ["auth_token", "S2noj4+NoU88DH/rIjwPUA=="], ["id", 6]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "admin2@metacorp.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "password", "admin", "first_name", "last_name", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["email", "admin2@metacorp.com"], ["password", "f6fdffe48c908deb0f4c3bd36c032e72"], ["admin", "f"], ["first_name", "Admin2"], ["last_name", ""], ["created_at", "2018-03-20 16:29:53.656716"], ["updated_at", "2018-03-20 16:29:53.656716"]]
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "retirements" ("total", "employee_contrib", "employer_contrib", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["total", "40000"], ["employee_contrib", "10000"], ["employer_contrib", "20000"], ["user_id", 7], ["created_at", "2018-03-20 16:29:53.660015"], ["updated_at", "2018-03-20 16:29:53.660015"]]
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "paid_time_offs" ("user_id", "sick_days_taken", "sick_days_earned", "pto_taken", "pto_earned", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["user_id", 7], ["sick_days_taken", 2], ["sick_days_earned", 5], ["pto_taken", 5], ["pto_earned", 30], ["created_at", "2018-03-20 16:29:53.660823"], ["updated_at", "2018-03-20 16:29:53.660823"]]
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "schedules" ("event_type", "date_begin", "date_end", "event_name", "event_desc", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["event_type", "pto"], ["date_begin", "2013-09-13"], ["date_end", "2013-09-20"], ["event_name", "AZ Trip"], ["event_desc", "Taking kids to Grand Canyon"], ["user_id", 7], ["created_at", "2018-03-20 16:29:53.661551"], ["updated_at", "2018-03-20 16:29:53.661551"]]
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "work_infos" ("user_id", "income", "bonuses", "years_worked", "SSN", "DoB", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["user_id", 7], ["income", "$40,000"], ["bonuses", "$10,000"], ["years_worked", 1], ["SSN", "777-77-7777"], ["DoB", "1979-01-01"], ["created_at", "2018-03-20 16:29:53.662223"], ["updated_at", "2018-03-20 16:29:53.662223"]]
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "performances" ("user_id", "date_submitted", "score", "comments", "reviewer", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["user_id", 7], ["date_submitted", "2012-01-01"], ["score", 5], ["comments", "Great job! You are my hero"], ["reviewer", 1], ["created_at", "2018-03-20 16:29:53.662950"], ["updated_at", "2018-03-20 16:29:53.662950"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."auth_token" = ? LIMIT ?[0m  [["auth_token", "A+61WodsnMR/RL3SsCYoaA=="], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? AND ("users"."id" != ?) LIMIT ?[0m  [["email", "admin2@metacorp.com"], ["id", 7], ["LIMIT", 1]]
+  [1m[35mSQL (0.1ms)[0m  [1m[33mUPDATE "users" SET "updated_at" = ?, "auth_token" = ? WHERE "users"."id" = ?[0m  [["updated_at", "2018-03-20 16:29:53.664515"], ["auth_token", "A+61WodsnMR/RL3SsCYoaA=="], ["id", 7]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "retirements" ("total", "employee_contrib", "employer_contrib", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["total", "4500"], ["employee_contrib", "1000"], ["employer_contrib", "2000"], ["user_id", 3], ["created_at", "2018-03-20 16:29:53.666230"], ["updated_at", "2018-03-20 16:29:53.666230"]]
+  [1m[35m (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "retirements" ("total", "employee_contrib", "employer_contrib", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["total", "30000"], ["employee_contrib", "8000"], ["employer_contrib", "16000"], ["user_id", 4], ["created_at", "2018-03-20 16:29:53.667654"], ["updated_at", "2018-03-20 16:29:53.667654"]]
+  [1m[35m (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "retirements" ("total", "employee_contrib", "employer_contrib", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["total", "40000"], ["employee_contrib", "10000"], ["employer_contrib", "20000"], ["user_id", 5], ["created_at", "2018-03-20 16:29:53.668936"], ["updated_at", "2018-03-20 16:29:53.668936"]]
+  [1m[35m (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "retirements" ("total", "employee_contrib", "employer_contrib", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["total", "12500"], ["employee_contrib", "3000"], ["employer_contrib", "6000"], ["user_id", 6], ["created_at", "2018-03-20 16:29:53.670332"], ["updated_at", "2018-03-20 16:29:53.670332"]]
+  [1m[35m (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "paid_time_offs" ("user_id", "sick_days_taken", "sick_days_earned", "pto_taken", "pto_earned", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["user_id", 3], ["sick_days_taken", 2], ["sick_days_earned", 5], ["pto_taken", 5], ["pto_earned", 30], ["created_at", "2018-03-20 16:29:53.671689"], ["updated_at", "2018-03-20 16:29:53.671689"]]
+  [1m[35m (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "paid_time_offs" ("user_id", "sick_days_taken", "sick_days_earned", "pto_taken", "pto_earned", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["user_id", 4], ["sick_days_taken", 3], ["sick_days_earned", 6], ["pto_taken", 3], ["pto_earned", 20], ["created_at", "2018-03-20 16:29:53.673169"], ["updated_at", "2018-03-20 16:29:53.673169"]]
+  [1m[35m (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "paid_time_offs" ("user_id", "sick_days_taken", "sick_days_earned", "pto_taken", "pto_earned", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["user_id", 5], ["sick_days_taken", 2], ["sick_days_earned", 5], ["pto_taken", 5], ["pto_earned", 30], ["created_at", "2018-03-20 16:29:53.674549"], ["updated_at", "2018-03-20 16:29:53.674549"]]
+  [1m[35m (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "paid_time_offs" ("user_id", "sick_days_taken", "sick_days_earned", "pto_taken", "pto_earned", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["user_id", 6], ["sick_days_taken", 1], ["sick_days_earned", 5], ["pto_taken", 10], ["pto_earned", 30], ["created_at", "2018-03-20 16:29:53.675845"], ["updated_at", "2018-03-20 16:29:53.675845"]]
+  [1m[35m (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schedules" ("event_type", "date_begin", "date_end", "event_name", "event_desc", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["event_type", "pto"], ["date_begin", "2014-07-30"], ["date_end", "2014-08-02"], ["event_name", "My 2014 Vacation"], ["event_desc", "vacation to france"], ["user_id", 3], ["created_at", "2018-03-20 16:29:53.677363"], ["updated_at", "2018-03-20 16:29:53.677363"]]
+  [1m[35m (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schedules" ("event_type", "date_begin", "date_end", "event_name", "event_desc", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["event_type", "pto"], ["date_begin", "2013-09-01"], ["date_end", "2013-09-12"], ["event_name", "Visit Parents"], ["event_desc", "Going Home to see folks"], ["user_id", 4], ["created_at", "2018-03-20 16:29:53.678819"], ["updated_at", "2018-03-20 16:29:53.678819"]]
+  [1m[35m (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schedules" ("event_type", "date_begin", "date_end", "event_name", "event_desc", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["event_type", "pto"], ["date_begin", "2013-09-13"], ["date_end", "2013-09-20"], ["event_name", "AZ Trip"], ["event_desc", "Taking kids to Grand Canyon"], ["user_id", 5], ["created_at", "2018-03-20 16:29:53.680181"], ["updated_at", "2018-03-20 16:29:53.680181"]]
+  [1m[35m (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schedules" ("event_type", "date_begin", "date_end", "event_name", "event_desc", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["event_type", "pto"], ["date_begin", "2013-12-20"], ["date_end", "2013-12-30"], ["event_name", "Christmas Leave"], ["event_desc", "Xmas Staycation"], ["user_id", 6], ["created_at", "2018-03-20 16:29:53.681564"], ["updated_at", "2018-03-20 16:29:53.681564"]]
+  [1m[35m (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "performances" ("user_id", "date_submitted", "score", "comments", "reviewer", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["user_id", 3], ["date_submitted", "2012-01-01"], ["score", 5], ["comments", "Great job! You are my hero"], ["reviewer", 1], ["created_at", "2018-03-20 16:29:53.682940"], ["updated_at", "2018-03-20 16:29:53.682940"]]
+  [1m[35m (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "performances" ("user_id", "date_submitted", "score", "comments", "reviewer", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["user_id", 3], ["date_submitted", "2013-01-01"], ["score", 5], ["comments", "Once again, you've done a great job this year. We greatly appreciate your hard work."], ["reviewer", 1], ["created_at", "2018-03-20 16:29:53.684353"], ["updated_at", "2018-03-20 16:29:53.684353"]]
+  [1m[35m (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "performances" ("user_id", "date_submitted", "score", "comments", "reviewer", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["user_id", 4], ["date_submitted", "2013-01-01"], ["score", 5], ["comments", "Great worker, great attitude for this newcomer!"], ["reviewer", 1], ["created_at", "2018-03-20 16:29:53.685686"], ["updated_at", "2018-03-20 16:29:53.685686"]]
+  [1m[35m (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "performances" ("user_id", "date_submitted", "score", "comments", "reviewer", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["user_id", 5], ["date_submitted", "2011-01-01"], ["score", 4], ["comments", "Wow, right out of the gate we've been very impressed but unfortunately, our system doesn't allow us to give you a full 5.0 because other ppl have gotten 5.0 ratings."], ["reviewer", 1], ["created_at", "2018-03-20 16:29:53.687031"], ["updated_at", "2018-03-20 16:29:53.687031"]]
+  [1m[35m (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "performances" ("user_id", "date_submitted", "score", "comments", "reviewer", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["user_id", 5], ["date_submitted", "2012-01-01"], ["score", 5], ["comments", "We highly recommend promotion for this employee! Consistent performer with proven leadership qualities."], ["reviewer", 1], ["created_at", "2018-03-20 16:29:53.688539"], ["updated_at", "2018-03-20 16:29:53.688539"]]
+  [1m[35m (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "performances" ("user_id", "date_submitted", "score", "comments", "reviewer", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["user_id", 5], ["date_submitted", "2013-01-01"], ["score", 4], ["comments", "Right out of the gate, Mike has made incredible moves as a newly appointed leader. His only improvement would be more cowbell. Not enough of it."], ["reviewer", 1], ["created_at", "2018-03-20 16:29:53.690005"], ["updated_at", "2018-03-20 16:29:53.690005"]]
+  [1m[35m (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "performances" ("user_id", "date_submitted", "score", "comments", "reviewer", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["user_id", 6], ["date_submitted", "2013-01-01"], ["score", 2], ["comments", "Ehh, you are okay, we will let you stay..... barely"], ["reviewer", 1], ["created_at", "2018-03-20 16:29:53.691406"], ["updated_at", "2018-03-20 16:29:53.691406"]]
+  [1m[35m (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "messages" ("creator_id", "receiver_id", "message", "read", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["creator_id", 6], ["receiver_id", 3], ["message", "Your benefits have been updated."], ["read", "f"], ["created_at", "2018-03-20 16:29:53.699992"], ["updated_at", "2018-03-20 16:29:53.699992"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "messages" ("creator_id", "receiver_id", "message", "read", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["creator_id", 5], ["receiver_id", 4], ["message", "Please update your profile."], ["read", "f"], ["created_at", "2018-03-20 16:29:53.702230"], ["updated_at", "2018-03-20 16:29:53.702230"]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "messages" ("creator_id", "receiver_id", "message", "read", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["creator_id", 4], ["receiver_id", 5], ["message", "Welcome to Railsgoat."], ["read", "f"], ["created_at", "2018-03-20 16:29:53.704569"], ["updated_at", "2018-03-20 16:29:53.704569"]]
+  [1m[35m (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "messages" ("creator_id", "receiver_id", "message", "read", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["creator_id", 3], ["receiver_id", 6], ["message", "Hello friend."], ["read", "f"], ["created_at", "2018-03-20 16:29:53.706593"], ["updated_at", "2018-03-20 16:29:53.706593"]]
+  [1m[35m (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "work_infos" ("user_id", "income", "bonuses", "years_worked", "SSN", "DoB", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["user_id", 3], ["income", "$50,000"], ["bonuses", "$10,000"], ["years_worked", 2], ["SSN", "555-55-5555"], ["DoB", "1980-01-01"], ["created_at", "2018-03-20 16:29:53.708460"], ["updated_at", "2018-03-20 16:29:53.708460"]]
+  [1m[35m (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "work_infos" ("user_id", "income", "bonuses", "years_worked", "SSN", "DoB", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["user_id", 4], ["income", "$40,000"], ["bonuses", "$10,000"], ["years_worked", 1], ["SSN", "333-33-3333"], ["DoB", "1979-01-01"], ["created_at", "2018-03-20 16:29:53.710375"], ["updated_at", "2018-03-20 16:29:53.710375"]]
+  [1m[35m (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "work_infos" ("user_id", "income", "bonuses", "years_worked", "SSN", "DoB", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["user_id", 5], ["income", "$60,000"], ["bonuses", "$12,000"], ["years_worked", 3], ["SSN", "444-44-4444"], ["DoB", "1981-01-01"], ["created_at", "2018-03-20 16:29:53.712162"], ["updated_at", "2018-03-20 16:29:53.712162"]]
+  [1m[35m (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "work_infos" ("user_id", "income", "bonuses", "years_worked", "SSN", "DoB", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["user_id", 6], ["income", "$30,000"], ["bonuses", "7,000"], ["years_worked", 1], ["SSN", "222-22-2222"], ["DoB", "1982-01-01"], ["created_at", "2018-03-20 16:29:53.713774"], ["updated_at", "2018-03-20 16:29:53.713774"]]
+  [1m[35m (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for ::1 at 2018-03-20 12:32:15 -0400
+Processing by SessionsController#new as HTML
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "analytics" ("ip_address", "user_agent", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["ip_address", "::1"], ["user_agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36"], ["created_at", "2018-03-20 16:32:15.543034"], ["updated_at", "2018-03-20 16:32:15.543034"]]
+  [1m[35m (1.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."auth_token" = ? LIMIT ?[0m  [["auth_token", ""], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", nil], ["LIMIT", 1]]
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (1.9ms)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."auth_token" = ? LIMIT ?[0m  [["auth_token", ""], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", nil], ["LIMIT", 1]]
+  Rendered layouts/shared/_header.html.erb (3.4ms)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."auth_token" = ? LIMIT ?[0m  [["auth_token", ""], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", nil], ["LIMIT", 1]]
+  Rendered layouts/shared/_sidebar.html.erb (1.3ms)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."auth_token" = ? LIMIT ?[0m  [["auth_token", ""], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", nil], ["LIMIT", 1]]
+  Rendered layouts/shared/_messages.html.erb (0.5ms)
+  Rendered layouts/shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 1913ms (Views: 1654.6ms | ActiveRecord: 4.8ms)
+
+
+Started GET "/assets/fullcalendar.min.self-1c067c78621fc3a7d207dd04ddc45a5582c91d70bc3694cdcc5e7ce93e752575.css?body=1" for ::1 at 2018-03-20 12:32:17 -0400
+Started GET "/assets/bootstrap-editable.self-d03d6f32421e9118444fe6457be0958db566ed99377c7047548283862f808c86.css?body=1" for ::1 at 2018-03-20 12:32:17 -0400
+Started GET "/assets/charts-graphs.self-9d6b231c271ff47d942550a37bfc6e40b9ec8f20be918b7fdf9749044fc7ef00.css?body=1" for ::1 at 2018-03-20 12:32:17 -0400
+Started GET "/assets/alertify.core.self-6bd03ddba1a912fd318019ed40293676858d10af489dab4a36688cc134e2a55d.css?body=1" for ::1 at 2018-03-20 12:32:17 -0400
+Started GET "/assets/calendar-theme.self-2d82e73536aa90990de51683b63c24fa101911fc78738b24657d1029e8f1ef2c.css?body=1" for ::1 at 2018-03-20 12:32:17 -0400
+Started GET "/assets/style.self-3bf304c42d18403a8fac0dc24439a8bfdc6826e2f0feacdae34c4f21de5d9ed5.css?body=1" for ::1 at 2018-03-20 12:32:17 -0400
+Started GET "/assets/main.self-6b85edd061c2d82b6c87d08e08105c959884e94bbf5cd6f3e442a03d7cb06308.css?body=1" for ::1 at 2018-03-20 12:32:17 -0400
+Started GET "/assets/timepicker.self-bc3f1e902ef2406439006cff14aa616ec03739fdd80714e8aa388cc78eccbb86.css?body=1" for ::1 at 2018-03-20 12:32:17 -0400
+Started GET "/assets/application.self-891a1abb727692e33331b01bd41fa73754600b73f55c9ee77db8412a83599e63.css?body=1" for ::1 at 2018-03-20 12:32:17 -0400
+Started GET "/assets/jquery.snippet.self-bd50cd1895d454d0d9f2f94e42f2bb1431ea8f4685de114a5431586808e86c0b.css?body=1" for ::1 at 2018-03-20 12:32:17 -0400
+Started GET "/assets/password_resets.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2018-03-20 12:32:17 -0400
+Started GET "/assets/jquery.fileupload-ui.self-b583e75cce596e1876ce3821b1ed4e5fbf4c9c3d92a23c5a1cc9389d028e3c7a.css?body=1" for ::1 at 2018-03-20 12:32:17 -0400
+Started GET "/assets/jquery.self-bd7ddd393353a8d2480a622e80342adf488fb6006d667e8b42e4c0073393abee.js?body=1" for ::1 at 2018-03-20 12:32:17 -0400
+Started GET "/assets/jquery_ujs.self-784a997f6726036b1993eb2217c9cb558e1cbb801c6da88105588c56f13b466a.js?body=1" for ::1 at 2018-03-20 12:32:17 -0400
+Started GET "/assets/jquery.scrollUp.self-62fdff48562302bb30969503f8903fc639c0bc09715b518bdd3b075e944dc6da.js?body=1" for ::1 at 2018-03-20 12:32:17 -0400
+Started GET "/assets/jquery.min.self-0cf9940550c91652f484d56247acad5627bfdd29a89ba63f72752da20ee04bf4.js?body=1" for ::1 at 2018-03-20 12:32:17 -0400
+Started GET "/assets/bootstrap.self-8861381dfc6898e20adc9a9076ec90727409dda3c75c80d2901488c7378d084a.js?body=1" for ::1 at 2018-03-20 12:32:17 -0400
+Started GET "/assets/bootstrap-colorpicker.self-9d2dbdaf627ec1b588796d0ddee541ad0b0818cf3ea45f3cee2852077504a197.js?body=1" for ::1 at 2018-03-20 12:32:17 -0400
+Started GET "/assets/date-picker/date.self-693cbcfb2b651ef559febade9c132153d81ce5290b11576d7b32861938cb08cd.js?body=1" for ::1 at 2018-03-20 12:32:17 -0400
+Started GET "/assets/date-picker/daterangepicker.self-efc5686531d6cb5984b3fb5a65e8eb18c52e11063c0a8f7dbc88712cee659c4b.js?body=1" for ::1 at 2018-03-20 12:32:17 -0400
+Started GET "/assets/bootstrap-timepicker.self-c90fd9928616a126dcb1e251601bc4d58b64e0532ccceec9ca141080f42df989.js?body=1" for ::1 at 2018-03-20 12:32:17 -0400
+Started GET "/assets/jquery.bootstrap.wizard.self-3288fa0968c14247a3a57fdcad05f7db094ba5dace859a5253cc7994d1441b6e.js?body=1" for ::1 at 2018-03-20 12:32:17 -0400
+Started GET "/assets/tiny-scrollbar.self-5645224dd4229e477e7aa943172720775ba5292923da4d4b803aa678b357c7e9.js?body=1" for ::1 at 2018-03-20 12:32:17 -0400
+Started GET "/assets/jquery.validate.min.self-1540b14b313827b53007ebba01e07bdabccd90d60734ef55713d14eeb2c44acc.js?body=1" for ::1 at 2018-03-20 12:32:17 -0400
+Started GET "/assets/jquery.easy-pie-chart.self-9523a2abea9910fbcf4459cd5a5e31a426d974632df4651f51396c0cc510965a.js?body=1" for ::1 at 2018-03-20 12:32:17 -0400
+Started GET "/assets/jquery.snippet.self-a04d9080d03604bd870ffa01bf070cd91bc73210b5a875644829cf549ca2bd9e.js?body=1" for ::1 at 2018-03-20 12:32:17 -0400
+Started GET "/assets/jquery-fileupload/jquery.iframe-transport.self-e461f7ff2a60ee89459106a6f3e349cf79b7f56066b3c8cbc73389b30e1eb592.js?body=1" for ::1 at 2018-03-20 12:32:17 -0400
+Started GET "/assets/jquery-fileupload/vendor/jquery.ui.widget.self-92c37a41e67e528eecf100716907331b4b9aa4f546bf75ef2e0529c8c03a562d.js?body=1" for ::1 at 2018-03-20 12:32:17 -0400
+Started GET "/assets/jquery-fileupload/jquery.fileupload.self-79c952fc273d5a8955a6093f4f489dcd509c5a2cefb2b9a049d3cdb2710ec8d3.js?body=1" for ::1 at 2018-03-20 12:32:17 -0400
+Started GET "/assets/jquery-fileupload/basic.self-6a3cf5192354f71615ac51034b3e97c20eda99643fcaf5bbe6d41ad59bd12167.js?body=1" for ::1 at 2018-03-20 12:32:17 -0400
+Started GET "/assets/jquery-fileupload/vendor/tmpl.self-c2108a63ad9ae9ab4a723bcf0104f6a92a63eb917331ff69fad6f02fe7219488.js?body=1" for ::1 at 2018-03-20 12:32:17 -0400
+Started GET "/assets/jsapi.self-19e5480ab1bf9d9d01847357a9257d86b655ca213cac6ebd6f80b0bc526bf104.js?body=1" for ::1 at 2018-03-20 12:32:17 -0400
+Started GET "/assets/application.self-46d683b2da5adeebccbd3372b82c3d660efd59a3b65171e42b21006964eb3590.js?body=1" for ::1 at 2018-03-20 12:32:17 -0400
+Started GET "/login" for ::1 at 2018-03-20 12:32:20 -0400
+Processing by SessionsController#new as HTML
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "analytics" ("ip_address", "referrer", "user_agent", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["ip_address", "::1"], ["referrer", "http://localhost:3000/"], ["user_agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36"], ["created_at", "2018-03-20 16:32:20.148007"], ["updated_at", "2018-03-20 16:32:20.148007"]]
+  [1m[35m (1.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."auth_token" = ? LIMIT ?[0m  [["auth_token", ""], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", nil], ["LIMIT", 1]]
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (1.9ms)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."auth_token" = ? LIMIT ?[0m  [["auth_token", ""], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", nil], ["LIMIT", 1]]
+  Rendered layouts/shared/_header.html.erb (2.4ms)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."auth_token" = ? LIMIT ?[0m  [["auth_token", ""], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", nil], ["LIMIT", 1]]
+  Rendered layouts/shared/_sidebar.html.erb (1.4ms)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."auth_token" = ? LIMIT ?[0m  [["auth_token", ""], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", nil], ["LIMIT", 1]]
+  Rendered layouts/shared/_messages.html.erb (0.6ms)
+  Rendered layouts/shared/_footer.html.erb (0.3ms)
+Completed 200 OK in 71ms (Views: 64.4ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/login" for ::1 at 2018-03-20 12:41:13 -0400
+Processing by SessionsController#new as HTML
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "analytics" ("ip_address", "user_agent", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["ip_address", "::1"], ["user_agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36"], ["created_at", "2018-03-20 16:41:14.067586"], ["updated_at", "2018-03-20 16:41:14.067586"]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."auth_token" = ? LIMIT ?[0m  [["auth_token", ""], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", nil], ["LIMIT", 1]]
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (1.7ms)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."auth_token" = ? LIMIT ?[0m  [["auth_token", ""], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", nil], ["LIMIT", 1]]
+  Rendered layouts/shared/_header.html.erb (5.5ms)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."auth_token" = ? LIMIT ?[0m  [["auth_token", ""], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", nil], ["LIMIT", 1]]
+  Rendered layouts/shared/_sidebar.html.erb (3.6ms)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."auth_token" = ? LIMIT ?[0m  [["auth_token", ""], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", nil], ["LIMIT", 1]]
+  Rendered layouts/shared/_messages.html.erb (1.2ms)
+  Rendered layouts/shared/_footer.html.erb (0.9ms)
+Completed 200 OK in 692ms (Views: 417.0ms | ActiveRecord: 5.8ms)
+
+
+Started GET "/login" for ::1 at 2018-03-20 12:41:14 -0400
+Processing by SessionsController#new as HTML
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "analytics" ("ip_address", "user_agent", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["ip_address", "::1"], ["user_agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36"], ["created_at", "2018-03-20 16:41:14.921642"], ["updated_at", "2018-03-20 16:41:14.921642"]]
+  [1m[35m (0.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."auth_token" = ? LIMIT ?[0m  [["auth_token", ""], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", nil], ["LIMIT", 1]]
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (3.1ms)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."auth_token" = ? LIMIT ?[0m  [["auth_token", ""], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", nil], ["LIMIT", 1]]
+  Rendered layouts/shared/_header.html.erb (1.7ms)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."auth_token" = ? LIMIT ?[0m  [["auth_token", ""], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", nil], ["LIMIT", 1]]
+  Rendered layouts/shared/_sidebar.html.erb (1.4ms)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."auth_token" = ? LIMIT ?[0m  [["auth_token", ""], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", nil], ["LIMIT", 1]]
+  Rendered layouts/shared/_messages.html.erb (0.6ms)
+  Rendered layouts/shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 96ms (Views: 90.7ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/login" for ::1 at 2018-03-20 12:41:27 -0400
+Processing by SessionsController#new as HTML
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "analytics" ("ip_address", "referrer", "user_agent", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["ip_address", "::1"], ["referrer", "http://localhost:3000/login?"], ["user_agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36"], ["created_at", "2018-03-20 16:41:27.458065"], ["updated_at", "2018-03-20 16:41:27.458065"]]
+  [1m[35m (1.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."auth_token" = ? LIMIT ?[0m  [["auth_token", ""], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", nil], ["LIMIT", 1]]
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (1.1ms)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."auth_token" = ? LIMIT ?[0m  [["auth_token", ""], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", nil], ["LIMIT", 1]]
+  Rendered layouts/shared/_header.html.erb (1.9ms)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."auth_token" = ? LIMIT ?[0m  [["auth_token", ""], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", nil], ["LIMIT", 1]]
+  Rendered layouts/shared/_sidebar.html.erb (1.9ms)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."auth_token" = ? LIMIT ?[0m  [["auth_token", ""], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", nil], ["LIMIT", 1]]
+  Rendered layouts/shared/_messages.html.erb (0.5ms)
+  Rendered layouts/shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 57ms (Views: 51.7ms | ActiveRecord: 2.1ms)
+
+
+Started GET "/tutorials/credentials" for ::1 at 2018-03-20 12:41:29 -0400
+Processing by TutorialsController#credentials as HTML
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "analytics" ("ip_address", "referrer", "user_agent", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["ip_address", "::1"], ["referrer", "http://localhost:3000/login?"], ["user_agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36"], ["created_at", "2018-03-20 16:41:29.131552"], ["updated_at", "2018-03-20 16:41:29.131552"]]
+  [1m[35m (0.4ms)[0m  [1m[36mcommit transaction[0m
+  Rendering tutorials/credentials.html.erb
+  Rendered tutorials/credentials.html.erb (0.5ms)
+Completed 200 OK in 20ms (Views: 9.7ms | ActiveRecord: 0.8ms)
+
+
