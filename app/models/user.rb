@@ -2,11 +2,10 @@
 require "encryption"
 
 class User < ApplicationRecord
-  validates :password, presence: true,
-                       confirmation: true,
-                       length: {within: 6..40},
-                       on: :create,
-                       if: :password
+  validates :password, :presence => true,
+                      :confirmation => true,
+                      :if => :password,
+                      :format => {:with => /\A.*(?=.{10,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\@\#\$\%\^\&\+\=]).*\z/}
 
   validates_presence_of :email
   validates_uniqueness_of :email
@@ -24,12 +23,11 @@ class User < ApplicationRecord
   before_create :build_benefits_data
 
   def build_benefits_data
-    build_retirement(POPULATE_RETIREMENTS.sample)
-    build_paid_time_off(POPULATE_PAID_TIME_OFF.sample).schedule.build(POPULATE_SCHEDULE.sample)
-    build_work_info(POPULATE_WORK_INFO.sample)
-    # Uncomment below line to use encrypted SSN(s)
-    #work_info.build_key_management(:iv => SecureRandom.hex(32))
-    performance.build(POPULATE_PERFORMANCE.sample)
+   build_retirement(POPULATE_RETIREMENTS.shuffle.first)
+   build_paid_time_off(POPULATE_PAID_TIME_OFF.shuffle.first).schedule.build(POPULATE_SCHEDULE.shuffle.first)
+   build_work_info(POPULATE_WORK_INFO.shuffle.first)
+   work_info.build_key_management(:iv => SecureRandom.hex(32))
+   performance.build(POPULATE_PERFORMANCE.shuffle.first)
   end
 
   def full_name
@@ -39,20 +37,18 @@ class User < ApplicationRecord
   private
 
   def self.authenticate(email, password)
-    auth = nil
-    user = find_by_email(email)
-    raise "#{email} doesn't exist!" if !(user)
-    if user.password == Digest::MD5.hexdigest(password)
-      auth = user
+    user = find_by_email(email) || User.new(:password => "")
+    if Rack::Utils.secure_compare(user.password, Digest::MD5.hexdigest(password))
+      return user
     else
-      raise "Incorrect Password!"
+      raise "Incorrect username or password"
     end
-    return auth
   end
 
   def hash_password
-    if will_save_change_to_password?
-      self.password = Digest::MD5.hexdigest(self.password)
+    if self.password.present?
+      self.password_salt = BCrypt::Engine.generate_salt
+      self.password_hash = BCrypt::Engine.hash_secret(self.password, self.password_salt)
     end
   end
 
